@@ -65,31 +65,35 @@ export function HomeClient() {
       {/* Hero Section */}
       {featured && (
         <section className="relative h-[400px] w-full bg-white sm:h-[460px]">
-           <div className="absolute inset-0">
+            <div className="absolute inset-0">
                 <Image
                     src={featured.thumbnail}
                     alt={featured.title}
                     fill
-                    className="object-cover opacity-90"
+                    className="object-cover"
                     priority
+                    quality={95}
+                    sizes="(max-width: 768px) 100vw, 1200px"
+                    unoptimized
                 />
-                 <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
-                 <div className="absolute inset-0 bg-gradient-to-r from-white via-white/40 to-transparent" />
+                 {/* Dark Gradient Overlay */}
+                 <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/80 to-transparent" />
+                 <div className="absolute inset-0 bg-gradient-to-r from-[#121212] via-[#121212]/50 to-transparent" />
             </div>
             
             <div className="relative mx-auto flex h-full max-w-5xl flex-col justify-end px-4 pb-12 sm:px-6 lg:px-8">
                 <span className="mb-2 w-fit rounded bg-primary px-3 py-1 text-xs font-bold text-white uppercase shadow-sm">
                     TOP PICK
                 </span>
-                <h1 className="mb-2 text-3xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl tracking-tight line-clamp-2">
+                <h1 className="mb-2 text-3xl font-extrabold text-white sm:text-5xl md:text-6xl tracking-tight line-clamp-2 drop-shadow-md">
                     {featured.title}
                 </h1>
-                 <div className="flex items-center gap-2 mb-4 text-sm font-medium text-gray-700">
+                 <div className="flex items-center gap-2 mb-4 text-sm font-medium text-gray-200">
                     <span className="uppercase">{featured.type}</span>
                     <span>•</span>
                     <span>{featured.latest_chapter}</span>
                 </div>
-                <p className="mb-6 max-w-xl text-lg text-gray-600 line-clamp-2 sm:line-clamp-3">
+                <p className="mb-6 max-w-xl text-lg text-gray-300 line-clamp-2 sm:line-clamp-3 drop-shadow-sm">
                     {featured.description}
                 </p>
                 <Link 

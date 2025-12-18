@@ -2,6 +2,14 @@ import { ApiComic, ApiResponse, ComicDetail, ChapterDetail } from "@/types/api";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
+// Helper to proxy images for HD quality via wsrv.nl
+const proxyImage = (url: string) => {
+    if (!url) return "";
+    // Strip existing query params (resize, quality, etc)
+    const cleanUrl = url.split("?")[0];
+    return `https://wsrv.nl/?url=${encodeURIComponent(cleanUrl)}&output=webp&q=90`;
+};
+
 export const KomikuService = {
   async getAllComics(
      tipe: "manga" | "manhwa" | "manhua" = "manhwa", 
@@ -15,8 +23,12 @@ export const KomikuService = {
         if (!res.ok) return [];
         const json: ApiResponse<ApiComic[]> = await res.json();
         const comics = json.data || [];
-        // Inject type into comics since list API doesn't return it
-        return comics.map(c => ({ ...c, type: tipe.toUpperCase() }));
+        // Inject type and optimize thumbnail
+        return comics.map(c => ({ 
+            ...c, 
+            type: tipe.toUpperCase(),
+            thumbnail: proxyImage(c.thumbnail)
+        }));
     } catch (e) {
         console.error("Failed to fetch all comics:", e);
         return [];
@@ -29,7 +41,11 @@ export const KomikuService = {
         if (!res.ok) return [];
         const json: ApiResponse<ApiComic[]> = await res.json();
         const comics = json.data || [];
-        return comics.map(c => ({ ...c, type: tipe.toUpperCase() }));
+        return comics.map(c => ({ 
+            ...c, 
+            type: tipe.toUpperCase(),
+            thumbnail: proxyImage(c.thumbnail) 
+        }));
      } catch (e) {
         console.error("Failed to fetch popular comics:", e);
         return [];
@@ -45,7 +61,11 @@ export const KomikuService = {
         if (!res.ok) return [];
         const json: ApiResponse<ApiComic[]> = await res.json();
         const comics = json.data || [];
-        return comics.map(c => ({ ...c, type: "MANHUA" }));
+        return comics.map(c => ({ 
+            ...c, 
+            type: "MANHUA",
+            thumbnail: proxyImage(c.thumbnail)
+        }));
       } catch (e) {
         console.error("Failed to fetch recommended comics:", e);
         return [];
@@ -58,7 +78,11 @@ export const KomikuService = {
         if (!res.ok) return [];
         const json: ApiResponse<ApiComic[]> = await res.json();
         const comics = json.data || [];
-        return comics.map(c => ({ ...c, type: tipe.toUpperCase() }));
+        return comics.map(c => ({ 
+            ...c, 
+            type: tipe.toUpperCase(),
+            thumbnail: proxyImage(c.thumbnail)
+        }));
       } catch (e) {
         console.error("Failed to fetch newest comics:", e);
         return [];
@@ -70,7 +94,11 @@ export const KomikuService = {
         const res = await fetch(`${BASE_URL}/search?s=${query}`, { next: { revalidate: 3600 } });
         if (!res.ok) return [];
         const json: ApiResponse<ApiComic[]> = await res.json();
-        return json.data || [];
+        const comics = json.data || [];
+        return comics.map(c => ({
+            ...c,
+            thumbnail: proxyImage(c.thumbnail)
+        }));
     } catch (e) {
         console.error("Failed to search comics:", e);
         return [];
@@ -82,7 +110,11 @@ export const KomikuService = {
         const res = await fetch(`${BASE_URL}/comic/${slug}`, { next: { revalidate: 3600 } });
         if (!res.ok) return null;
         const json: ApiResponse<ComicDetail> = await res.json();
-        return json.data || null;
+        const comic = json.data;
+        if (comic) {
+            comic.thumbnail = proxyImage(comic.thumbnail);
+        }
+        return comic || null;
     } catch (e) {
         console.error(`Failed to fetch comic detail for ${slug}:`, e);
         return null;

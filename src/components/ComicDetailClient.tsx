@@ -45,6 +45,9 @@ export function ComicDetailClient({ slug }: ComicDetailClientProps) {
                         fill
                         className="object-cover"
                         priority
+                        quality={95}
+                        sizes="(max-width: 640px) 200px, 220px"
+                        unoptimized
                     />
                 </div>
                 <div className="flex flex-1 flex-col text-center sm:text-left">

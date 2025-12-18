@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "thumbnail.komiku.id",
       },
+      {
+        protocol: "https",
+        hostname: "wsrv.nl",
+      }
     ],
   },
 };

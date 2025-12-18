@@ -21,7 +21,9 @@ export function ComicCard({ comic, priority = false, rank }: ComicCardProps) {
           fill
           className="object-cover transition-transform group-hover:scale-105"
           priority={priority}
-          sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 20vw, 16vw"
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+          quality={90}
+          unoptimized
         />
         {/* Type Badge */}
         <div className="absolute top-2 left-2 rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-bold text-white uppercase backdrop-blur-sm">
