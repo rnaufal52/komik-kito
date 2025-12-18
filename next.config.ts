@@ -1,7 +1,30 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+      {
+        protocol: "https",
+        hostname: "pic-b.komiku.org", 
+      },
+      {
+        protocol: "https",
+        hostname: "thumbnail.komiku.org",
+      },
+      {
+        protocol: "https",
+        hostname: "img.komiku.org",
+      },
+      {
+        protocol: "https",
+        hostname: "thumbnail.komiku.id",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
