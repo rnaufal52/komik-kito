@@ -3,7 +3,7 @@ export function Footer() {
     <footer className="w-full bg-gray-100 py-12 text-sm text-gray-500 mt-auto">
       <div className="mx-auto max-w-5xl px-4 flex flex-col md:flex-row justify-between gap-8">
         <div>
-            <h3 className="text-xl font-black text-primary mb-4 tracking-tighter">KOMIK KITO</h3>
+            <h3 className="text-xl font-black text-primary mb-4 tracking-tighter">Bee Comic</h3>
             <p className="max-w-xs leading-relaxed">
                 Read your favorite webtoons, manga, and manhwa anytime, anywhere. 
                 Free and high quality for everyone.
@@ -24,7 +24,7 @@ export function Footer() {
         </div>
       </div>
       <div className="mx-auto max-w-5xl px-4 mt-12 pt-8 text-center md:text-left text-xs opacity-60">
-        &copy; {new Date().getFullYear()} Komik Kito. All rights reserved.
+        &copy; {new Date().getFullYear()} Bee Comic. All rights reserved.
       </div>
     </footer>
   );

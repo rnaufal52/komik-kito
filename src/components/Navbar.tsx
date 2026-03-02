@@ -16,7 +16,7 @@ export function Navbar() {
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-8">
           <Link href="/" className="text-2xl font-black text-primary tracking-tighter hover:opacity-80 transition-opacity">
-            KOMIK KITO
+            Bee Comic
           </Link>
           <div className="hidden md:flex items-center gap-6 text-gray-600">
             <Link href="/" className="hover:text-primary transition-colors font-bold tracking-wide">
